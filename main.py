@@ -3,10 +3,18 @@ from pydantic import BaseModel
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 client = OpenAI(api_key = os.getenv("AIPIPE_API_KEY"),
                 base_url ="https://aipipe.org/openai/v1")
 
