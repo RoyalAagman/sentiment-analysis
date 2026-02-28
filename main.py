@@ -55,6 +55,7 @@ async def generate_comment(request: ChatRequest):
         )
 
         result = response.choices[0].message.parsed
+        result.sentiment = result.sentiment.lower()
         return result
     
     except Exception as e:
